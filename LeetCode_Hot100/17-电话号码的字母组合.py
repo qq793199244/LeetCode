@@ -29,8 +29,7 @@ class Solution(object):
             else:
                 for i in phone[next[0]]:
                     backtrack(str+i, next[1:])
-        if digits:
-            backtrack('', digits)
+        backtrack('', digits)
         return res
 
 
