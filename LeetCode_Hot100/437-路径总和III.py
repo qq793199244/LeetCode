@@ -51,7 +51,7 @@ class Solution(object):
             cur_sum += root.val
             pre = cur_sum - val
             self.count += dic.get(pre, 0)
-            dic[cur_sum] = dic.get(pre, 0) + 1
+            dic[cur_sum] = dic.get(cur_sum, 0) + 1
             dfs(root.left, val, cur_sum, dic)
             dfs(root.right, val, cur_sum, dic)
             dic[cur_sum] -= 1
