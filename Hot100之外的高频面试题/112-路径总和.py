@@ -12,12 +12,37 @@ class TreeNode(object):
         self.right = None
 
 class Solution(object):
-    def hasPathSum(self, root, sum):
+
+    # DFS 时间复杂度O(n)，空间复杂度O(H)，最坏O(n)，平均O(logn)
+    def hasPathSum1(self, root, sum):
         if not root:
             return False
         if not root.left and not root.right:
             return root.val == sum
-        return self.hasPathSum(root.left, sum-root.val) or self.hasPathSum(root.right, sum-root.val)
+        return self.hasPathSum1(root.left, sum-root.val) or \
+               self.hasPathSum1(root.right, sum-root.val)
+
+
+    # BFS 时间复杂度O(n)，空间复杂度O(n)
+    def hasPathSum2(self, root, sum):
+        if not root: return False
+        from collections import deque
+        que_node = deque([root])
+        que_val = deque([root.val])
+        while que_node:
+            now = que_node.popleft()
+            tmp = que_val.popleft()
+            if not now.left and not now.right:
+                if tmp == sum:
+                    return True
+                continue
+            if now.left:
+                que_node.append(now.left)
+                que_val.append(tmp + now.left.val)
+            if now.right:
+                que_node.append(now.right)
+                que_val.append(tmp + now.right.val)
+        return False
 
 
 if __name__ == '__main__':
@@ -31,5 +56,5 @@ if __name__ == '__main__':
     n7 = n11.left = TreeNode(7)
     n2 = n11.right = TreeNode(2)
     n1 = n4_2.right = TreeNode(1)
-    res = u.hasPathSum(root, 22)
-    print(res)
+    print(u.hasPathSum1(root, 22))
+    print(u.hasPathSum2(root, 22))
