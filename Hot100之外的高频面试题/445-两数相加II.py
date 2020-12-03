@@ -31,6 +31,7 @@ class Solution(object):
             cur = s1 + s2 + s
             s = 1 if cur >= 10 else 0
             cur = cur % 10
+            # 头插法
             curNode = ListNode(cur)
             curNode.next = dummy.next
             dummy.next = curNode
