@@ -25,7 +25,17 @@ class Solution(object):
 
 if __name__ == '__main__':
     u = Solution()
-    num1 = [3,4,5,1,2]
-    num2 = [2,2,2,0,1]
-    print(u.minArray(num1))
-    print(u.minArray(num2))
+    nums1 = [3, 4, 5, 1, 2]
+    nums2 = [5, 1, 2, 3, 4]
+    nums3 = [1, 0, 1, 1, 1]
+    nums4 = [1, 1, 1, 0, 1]
+    nums5 = [2, 2, 2, 2, 2]
+    nums6 = [1, 2, 3, 4, 5]
+    nums7 = [5, 4, 3, 2, 1]
+    print(u.minArray(nums1))
+    print(u.minArray(nums2))
+    print(u.minArray(nums3))
+    print(u.minArray(nums4))
+    print(u.minArray(nums5))
+    print(u.minArray(nums6))
+    print(u.minArray(nums7))
