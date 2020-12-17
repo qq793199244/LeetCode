@@ -37,34 +37,34 @@ class Solution:
             if s[i] not in win:
                 win += s[i]
                 right += 1
-                # 记录当前最大长度
-                res = max(res, len(win))
             # 如果当前字符与滑动窗口内字符重复，左指针移动到滑动窗口内重复字符的下一个字符，滑动窗口内字符串为从左指针到新加入的字符
             else:
                 left = win.index(s[i]) + 1
                 win = win[left:] + s[i]
                 # 重复后，重新比较最大长度
                 res = max(res, len(win))
+            res = max(res, len(win))
         return res
 
     def lengthOfLongestSubstring2(self, s):
         '''
             哈希表
             时间复杂度O(n)，遍历字符串O(n)，字典中判断in O(1)
-            空间复杂度O(n)
+            空间复杂度O(C)，C表示哈希表的字符集大小
         '''
         n = len(s)
         if n == 0:
             return 0
         d = {}
-        # 初始值为-1，相当于在字符串的左边界的左侧，还没有开始移动
-        end = -1
+        end = 0
         res = 0
         for idx, c in enumerate(s):
+            # 如果c在字典中出现过，end移动到出现位置的下一个字符
             if c in d:
-                end = max(end, d[c])
+                end = max(end, d[c] + 1)
+            # 记录c的下标
             d[c] = idx
-            res = max(res, idx - end)
+            res = max(res, idx - end + 1)
         return res
 
 
