@@ -38,6 +38,22 @@ class Solution(object):
                 root = root.right
         return res
 
+    # 非递归。前序遍历的改编写法；前序（中左右）----------调换（中右左）----------反转（左右中）
+    # 时间复杂度O(n) 空间复杂度O(n)
+    def postorderTraversal3(self, root):
+        res = []
+        if not root:
+            return res
+        tmp_stack = [root]
+        while tmp_stack:
+            node = tmp_stack.pop()
+            res.append(node.val)
+            if node.left:
+                tmp_stack.append(node.left)
+            if node.right:
+                tmp_stack.append(node.right)
+        return res[::-1]
+
 
 if __name__ == '__main__':
     u = Solution()
@@ -49,4 +65,5 @@ if __name__ == '__main__':
     node5 = node3.left = TreeNode(5)
     node6 = node3.right = TreeNode(6)
     print('递归：', u.postorderTraversal1(root))
-    print('迭代：', u.postorderTraversal2(root))
+    print('迭代1：', u.postorderTraversal2(root))
+    print('迭代2：', u.postorderTraversal3(root))

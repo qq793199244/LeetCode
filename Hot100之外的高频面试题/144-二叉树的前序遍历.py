@@ -29,6 +29,7 @@ class Solution(object):
         while stack:
             node = stack.pop()
             res.append(node.val)
+            # 利用栈先进后出性质，先把右子节点放入栈
             if node.right:
                 stack.append(node.right)
             if node.left:
