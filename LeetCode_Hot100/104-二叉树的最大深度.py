@@ -24,12 +24,12 @@ class Solution(object):
 
 if __name__ == '__main__':
     u = Solution()
-    # [3,9,20,null,null,15,7]
     root = TreeNode(3)
-    l2 = root.left = TreeNode(9)
-    r2 = root.right = TreeNode(20)
-    r3_l = r2.left = TreeNode(15)
-    r3_r = r2.right = TreeNode(7)
+    n9 = root.left = TreeNode(9)
+    n20 = root.right = TreeNode(20)
+    n15 = n20.left = TreeNode(15)
+    n7 = n20.right = TreeNode(7)
+    n1 = n7.left = TreeNode(1)
 
     res = u.maxDepth(root)
     print(res)
