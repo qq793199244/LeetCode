@@ -7,18 +7,22 @@
 给定一个链表: 1->2->3->4->5, 和 k = 2.
 返回链表 4->5.
 '''
+
+
 # Definition for singly-linked list.
 class ListNode(object):
     def __init__(self, x):
         self.val = x
         self.next = None
 
+
 class Solution(object):
+    # 不用算链的总长度
     def getKthFromEnd(self, head, k):
         if not head or k == 0:
             return None
         fast = slow = head
-        # 快指针比慢指针先走k
+        # 快指针比慢指针先走k-1步，0至k-1是走了k-1步
         for _ in range(k):
             # k大于链表长度的情况
             if not fast:
@@ -30,6 +34,21 @@ class Solution(object):
             slow = slow.next
         return slow
 
+    # 算链的长度
+    def getKthFromEnd2(self, head, k):
+        if not head:
+            return None
+        i = cur = head
+        count = 0
+        while cur:
+            count += 1
+            cur = cur.next
+        if k > count:
+            return None
+        for _ in range(count - k):
+            i = i.next
+        return i
+
 
 if __name__ == '__main__':
     u = Solution()
@@ -39,7 +58,7 @@ if __name__ == '__main__':
     l3 = l2.next = ListNode(3)
     l4 = l3.next = ListNode(4)
     l5 = l4.next = ListNode(5)
-    l6 = l5.next = ListNode(6)
+
     res = u.getKthFromEnd(l1, 2)
     while res:
         print(res.val, end='→')
@@ -47,3 +66,14 @@ if __name__ == '__main__':
     print()
     res2 = u.getKthFromEnd(l1, 7)
     print(res)
+
+
+    f1 = u.getKthFromEnd2(l1, 2)
+    while f1:
+        print(f1.val, end='→')
+        f1 = f1.next
+    print()
+    f2 = u.getKthFromEnd2(l1, 7)
+    while f2:
+        print(f2.val, end='→')
+        f2 = f2.next

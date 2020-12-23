@@ -8,10 +8,13 @@
 输入：(7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
 输出：7 -> 8 -> 0 -> 7
 '''
+
+
 class ListNode(object):
     def __init__(self, x):
         self.val = x
         self.next = None
+
 
 class Solution(object):
     def addTwoNumbers(self, l1, l2):
@@ -37,6 +40,28 @@ class Solution(object):
             dummy.next = curNode
         return dummy.next
 
+    def addTwoNumbers2(self, l1, l2):
+        stack1 = []
+        stack2 = []
+        while l1:
+            stack1.append(l1.val)
+            l1 = l1.next
+        while l2:
+            stack2.append(l2.val)
+            l2 = l2.next
+        dummy = ListNode(0)
+        s = 0
+        while stack1 or stack2 or s:
+            s1 = stack1.pop() if stack1 else 0
+            s2 = stack2.pop() if stack2 else 0
+            s = s1 + s2 + s
+            # 头插法
+            curNode = ListNode(s % 10)
+            curNode.next = dummy.next
+            dummy.next = curNode
+            s //= 10
+        return dummy.next
+
 
 if __name__ == '__main__':
     u = Solution()
@@ -47,7 +72,15 @@ if __name__ == '__main__':
     l2 = ListNode(5)
     l2_node6 = l2.next = ListNode(6)
     l2_node4 = l2_node6.next = ListNode(4)
-    res = u.addTwoNumbers(l1, l2)
-    while res:
-        print(res.val, end='')
-        res = res.next
+
+    res1 = u.addTwoNumbers(l1, l2)
+    while res1:
+        print(res1.val, end='')
+        res1 = res1.next
+
+    print()
+
+    res2 = u.addTwoNumbers(l1, l2)
+    while res2:
+        print(res2.val, end='')
+        res2 = res2.next
