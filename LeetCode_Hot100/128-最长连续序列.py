@@ -54,7 +54,7 @@ class Solution:
                 if cur_len > max_len:
                     max_len = cur_len
                 # 把当前数的value和边界value，都设置为当前长度
-                d[i] = d[i - left] = d[i + right] =  cur_len
+                d[i] = d[i - left] = d[i + right] = cur_len
         return max_len
 
 
