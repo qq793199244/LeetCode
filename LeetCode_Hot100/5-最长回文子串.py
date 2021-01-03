@@ -14,7 +14,7 @@ class Solution:
     # 中心扩散法；时间复杂度O(n^2)，
     # 枚举“中心位置”时间复杂度为O(n)，从“中心位置”扩散得到“回文子串”的时间复杂度为O(n)；
     # 空间复杂度O(1)
-    def longestlongestPalindrome1(self, s):
+    def longestPalindrome1(self, s):
         size = len(s)
         if size < 2:
             return s
@@ -42,7 +42,7 @@ class Solution:
         return s[i + 1 : j], j - i - 1
 
     # 动态规划；时间复杂度O(n^2)，空间复杂度O(n^2)
-    def longestlongestPalindrome2(self, s):
+    def longestPalindrome2(self, s):
         n = len(s)
         if n < 2:
             return s
@@ -73,7 +73,7 @@ class Solution:
     # 以下代码虽然看起来短了一些，但是丢失了可读性，
     # 逻辑运算符混用，虽然加上了括号表示优先级，但如果没有前文铺垫，很难读懂是什么意思。
     # 不太推荐大家这么写。
-    def longestlongestPalindrome3(self, s):
+    def longestPalindrome3(self, s):
         n = len(s)
         if n < 2:
             return s
@@ -98,17 +98,17 @@ if __name__ == '__main__':
     s3 = "cbbd"
     s4 = "a"
 
-    print(u.longestlongestPalindrome1(s1))
-    print(u.longestlongestPalindrome1(s2))
-    print(u.longestlongestPalindrome1(s3))
-    print(u.longestlongestPalindrome1(s4))
+    print(u.longestPalindrome1(s1))
+    print(u.longestPalindrome1(s2))
+    print(u.longestPalindrome1(s3))
+    print(u.longestPalindrome1(s4))
 
-    print(u.longestlongestPalindrome2(s1))
-    print(u.longestlongestPalindrome2(s2))
-    print(u.longestlongestPalindrome2(s3))
-    print(u.longestlongestPalindrome2(s4))
+    print(u.longestPalindrome2(s1))
+    print(u.longestPalindrome2(s2))
+    print(u.longestPalindrome2(s3))
+    print(u.longestPalindrome2(s4))
 
-    print(u.longestlongestPalindrome3(s1))
-    print(u.longestlongestPalindrome3(s2))
-    print(u.longestlongestPalindrome3(s3))
-    print(u.longestlongestPalindrome3(s4))
+    print(u.longestPalindrome3(s1))
+    print(u.longestPalindrome3(s2))
+    print(u.longestPalindrome3(s3))
+    print(u.longestPalindrome3(s4))
