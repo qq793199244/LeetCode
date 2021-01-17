@@ -1,43 +1,72 @@
 '''
-在数组中的两个数字，如果前面一个数字大于后面的数字，
-则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。
+在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。
 示例 1:
-输入: [7,5,6,4]
-输出: 5
+输入: [7,5,6,4]       输出: 5
+限制：0 <= 数组长度 <= 50000
 '''
+
+
 class Solution:
-    def merge(self, a1, a2):
-        l = r = 0
-        n1, n2 = len(a1), len(a2)
-        res = []
-        while l < n1 and r < n2:
-            if a1[l] > a2[r]:
-                # 若左边数组第l个元素大于右边第r个元素，则左边数组将有(n1-l)个大于右边第r个元素
-                self.count += (n1 - l)
-                res.append(a2[r])
-                r += 1
-            else:
-                res.append(a1[l])
-                l += 1
-        return res + a1[l:] + a2[r:]
+    # 暴力法，平台超时。时间复杂度O(n^2)，空间复杂度O(1)
+    def reverseParis1(self, nums):
+        res = 0
+        n = len(nums)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if nums[i] > nums[j]:
+                    res += 1
+                    res %= 1000000007
+        return res
 
-    def merge_sort(self, arr):
-        n = len(arr)
-        if n <= 1:
-            return arr
-        left = self.merge_sort(arr[:n//2])
-        right = self.merge_sort(arr[n//2:])
-        return self.merge(left, right)
-
-    def reversePairs(self, nums):
+    # 归并排序思想。时间复杂度O(nlogn)，空间复杂度O(n)
+    def reverseParis2(self, nums):
         self.count = 0
-        self.merge_sort(nums)
+
+        # 归并排序
+        def merge_sort(arr):
+            n = len(arr)
+            if n <= 1:
+                return arr
+            # 拆分
+            mid = n // 2
+            left = merge_sort(arr[:mid])
+            right = merge_sort(arr[mid:])
+            return merge(left, right)
+
+        # 合并
+        def merge(left, right):
+            l, r = 0, 0
+            tmp = []
+            while l < len(left) and r < len(right):
+                if left[l] <= right[r]:
+                    tmp.append(left[l])
+                    l += 1
+                else:
+                    # 若左边数组第l个元素大于右边第r个元素，则左边数组将有(n-l)个大于右边第r个元素
+                    self.count += (len(left) - l)
+                    tmp.append(right[r])
+                    r += 1
+            tmp += left[l:]
+            tmp += right[r:]
+            return tmp
+
+        merge_sort(nums)
         return self.count
 
 
 if __name__ == '__main__':
     u = Solution()
-    nums1 = [7, 5, 6, 4]
-    nums2 = []
-    print(u.reversePairs(nums1))
-    print(u.reversePairs(nums2))
+    nums1 = []
+    nums2 = [1, 2, 3, 4]
+    nums3 = [7, 5, 6, 4]
+    nums4 = [1, 2, 3, 4, 5, 6, 7, 0]
+
+    print(u.reverseParis1(nums1))
+    print(u.reverseParis1(nums2))
+    print(u.reverseParis1(nums3))
+    print(u.reverseParis1(nums4))
+    print('--------------------')
+    print(u.reverseParis2(nums1))
+    print(u.reverseParis2(nums2))
+    print(u.reverseParis2(nums3))
+    print(u.reverseParis2(nums4))
