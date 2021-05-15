@@ -16,6 +16,8 @@
 输入：height = [1,2,1]
 输出：2
 '''
+
+
 class Solution:
     # 双指针。时间复杂度O(n)，空间复杂度O(1)
     def maxArea(self, height):
@@ -34,7 +36,7 @@ class Solution:
 
 if __name__ == '__main__':
     u = Solution()
-    print(u.maxArea([1,8,6,2,5,4,8,3,7]))   # 49
-    print(u.maxArea([1,1])) # 1
-    print(u.maxArea([4,3,2,1,4]))   # 16
-    print(u.maxArea([1,2,1]))    # 2
+    print(u.maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))  # 49
+    print(u.maxArea([1, 1]))  # 1
+    print(u.maxArea([4, 3, 2, 1, 4]))  # 16
+    print(u.maxArea([1, 2, 1]))  # 2
