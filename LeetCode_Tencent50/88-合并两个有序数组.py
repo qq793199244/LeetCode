@@ -12,6 +12,7 @@
 
 
 class Solution:
+    # 从后向前比较。时间复杂度O(m+n)，空间复杂度O(1)
     def merge(self, nums1, m, nums2, n):
         cur = m + n - 1
         while m > 0 and n > 0:
