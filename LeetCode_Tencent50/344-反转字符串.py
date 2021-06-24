@@ -12,7 +12,7 @@
 
 
 class Solution:
-    # 双指针。时间复杂度O(n)，空间复杂度O(1)
+    # 双指针，前后扫描。时间复杂度O(n)，空间复杂度O(1)
     def reverseString(self, s):
         n = len(s)
         if n <= 1:
