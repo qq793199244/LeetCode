@@ -22,8 +22,16 @@
 
 
 class Solution:
-    # 动态规划；时间复杂度O(n^2)，空间复杂度O(n^2)
+    # 暴力递归，会超时。时间复杂度O(2^(m + n - 1) - 1)
     def uniquePaths(self, m, n):
+        def dfs(i, j):
+            if i == 0 or j == 0:
+                return 1
+            return dfs(i - 1, j) + dfs(i, j - 1)
+        return dfs(m - 1, n - 1)
+
+    # 动态规划；时间复杂度O(m * n)，空间复杂度O(m * n)
+    def uniquePaths2(self, m, n):
         dp = [[1 for _ in range(n)] for _ in range(m)]
         for i in range(m):
             for j in range(n):
@@ -34,14 +42,15 @@ class Solution:
                     dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
         return dp[-1][-1]
 
-    # 动态规划优化；时间复杂度O(n^2)，空间复杂度O(n)
+    # 动态规划优化；时间复杂度O(m * n)，空间复杂度O(n)
     '''
     dp[j] += dp[j-1] 即 dp[j] = dp[j-1] + dp[j] 
     未赋值之前右边的dp[j]始终表示当前行第i行的上一行第j列的值，
     赋值之后左边的dp[j]表示当前行第i行第j列的值，dp[j-1]表示当前行第i行第j-1列的值
     (dp[j-1] 在计算dp[j]之前就已经计算了，所以表示的是当前行而不是上一行)
     '''
-    def uniquePaths2(self, m, n):
+
+    def uniquePaths3(self, m, n):
         dp = [1] * n
         for i in range(1, m):
             for j in range(1, n):
@@ -55,8 +64,15 @@ if __name__ == '__main__':
     print(u.uniquePaths(3, 2))  # 3
     print(u.uniquePaths(7, 3))  # 28
     print(u.uniquePaths(3, 3))  # 6
+
     print('--------------------')
     print(u.uniquePaths2(3, 7))  # 28
     print(u.uniquePaths2(3, 2))  # 3
     print(u.uniquePaths2(7, 3))  # 28
     print(u.uniquePaths2(3, 3))  # 6
+
+    print('--------------------')
+    print(u.uniquePaths3(3, 7))  # 28
+    print(u.uniquePaths3(3, 2))  # 3
+    print(u.uniquePaths3(7, 3))  # 28
+    print(u.uniquePaths3(3, 3))  # 6
