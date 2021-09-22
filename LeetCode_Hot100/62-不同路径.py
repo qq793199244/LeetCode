@@ -42,6 +42,21 @@ class Solution:
                     dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
         return dp[-1][-1]
 
+    def uniquePaths2_1(self, m, n):
+        if m * n == 0:
+            return 0
+        if m == 1 or n == 1:
+            return 1
+        dp = [[0] * n for _ in range(m)]
+        for i in range(m):
+            dp[i][0] = 1
+        for j in range(n):
+            dp[0][j] = 1
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = dp[i][j - 1] + dp[i - 1][j]
+        return dp[-1][-1]
+
     # 动态规划优化；时间复杂度O(m * n)，空间复杂度O(n)
     '''
     dp[j] += dp[j-1] 即 dp[j] = dp[j-1] + dp[j] 
@@ -70,6 +85,12 @@ if __name__ == '__main__':
     print(u.uniquePaths2(3, 2))  # 3
     print(u.uniquePaths2(7, 3))  # 28
     print(u.uniquePaths2(3, 3))  # 6
+
+    print('--------------------')
+    print(u.uniquePaths2_1(3, 7))  # 28
+    print(u.uniquePaths2_1(3, 2))  # 3
+    print(u.uniquePaths2_1(7, 3))  # 28
+    print(u.uniquePaths2_1(3, 3))  # 6
 
     print('--------------------')
     print(u.uniquePaths3(3, 7))  # 28
